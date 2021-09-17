@@ -24,7 +24,15 @@ def read_facilities_csv_data():
 
 
 def generate_orgunit_metadata(facilities, ids):
-    org_units = []
+    org_units = {
+        "system": {
+            "id": "cb1409e9-4d51-4689-bbfd-1b7a3eb17d4a",
+            "rev": "a95cf40",
+            "version": "2.36.3",
+            "date": "2021-09-17T07:57:56.876"
+        },
+        "organisationUnits": []
+    }
     for facility, new_id in zip(facilities, ids[: len(facilities)]):
         basePath = ""
         parent = ""
@@ -64,7 +72,7 @@ def generate_orgunit_metadata(facilities, ids):
             "attributeValues": [],
             "translations": [],
         }
-        org_units.append(metadata)
+        org_units["organisationUnits"].append(metadata)
 
     with open(JSON_OUTPUT_PATH, "w") as json_output:
         json.dump(
